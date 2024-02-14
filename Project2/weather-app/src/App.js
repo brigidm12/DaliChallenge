@@ -322,3 +322,233 @@ const vibeToPlaylistID = {
 };
 
 export default WeatherApp;
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState, useEffect } from 'react';
+
+// const WeatherApp = () => {
+//   // State variables using useState hook
+//   const [weatherData, setWeatherData] = useState(null);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
+//   const [vibeLabel, setVibeLabel] = useState('');
+//   const [playlistData, setPlaylistData] = useState(null);
+
+//   // Fetch weather data on component mount
+//   useEffect(() => {
+//     const fetchWeatherData = async () => {
+//       try {
+//         // Fetch user's location
+//         const position = await getCurrentPosition();
+//         const { latitude, longitude } = position.coords;
+
+//         // Fetch weather data using OpenWeatherMap API
+//         const apiKey = '5292c5a4f1ca85ff6dc8f5e859503689';
+//         const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`;
+//         const response = await fetch(apiUrl);
+//         if (!response.ok) {
+//           throw new Error('Failed to fetch weather data');
+//         }
+//         const data = await response.json();
+//         setWeatherData(data);
+//         setLoading(false);
+//       } catch (error) {
+//         setError(error.message);
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchWeatherData();
+//   }, []);
+
+//   // Get vibe label based on weather data
+//   useEffect(() => {
+//     if (weatherData) {
+//       const vibe = getVibeLabel(weatherData);
+//       setVibeLabel(vibe);
+//     }
+//   }, [weatherData]);
+
+//   // Fetch playlist data when vibe label changes
+//   useEffect(() => {
+//     if (vibeLabel) {
+//       fetchPlaylistData();
+//     }
+//   }, [vibeLabel]);
+
+//   // Get user's current position
+//   const getCurrentPosition = () => {
+//     return new Promise((resolve, reject) => {
+//       navigator.geolocation.getCurrentPosition(resolve, reject);
+//     });
+//   };
+
+//   // Determine vibe label based on weather data
+//   const getVibeLabel = (weatherData) => {
+//     const temp = weatherData.main.temp;
+//     const humidity = weatherData.main.humidity;
+//     const windSpeed = weatherData.wind.speed;
+//     const description = weatherData.weather[0].description.toLowerCase();
+  
+//     let vibe = 'Neutral';
+//     const hour = new Date().getHours();
+//     if (hour >= 6 && hour < 12) {
+//       vibe = 'Morning';
+//     } else if (hour >= 12 && hour < 18) {
+//       vibe = 'Daytime';
+//     } else {
+//       vibe = 'Nighttime';
+//     }
+  
+
+//     // Temperature-based vibes
+//     if (temp < 32) {
+//       vibe += ', Cold';
+//     } else if (temp >= 32 && temp < 60) {
+//       vibe += ', Cool';
+//     } else if (temp >= 60 && temp < 80) {
+//       vibe += ', Pleasant';
+//     } else {
+//       vibe += ', Warm';
+//     }
+
+//     // Humidity-based vibes
+//     if (humidity < 30) {
+//       vibe += ', Dry';
+//     } else if (humidity >= 30 && humidity < 70) {
+//       vibe += ', Humid';
+//     } else {
+//       vibe += ', Muggy';
+//     }
+
+//     // Wind-based vibes
+//     if (windSpeed < 5) {
+//       vibe += ', Calm';
+//     } else if (windSpeed >= 5 && windSpeed < 15) {
+//       vibe += ', Breezy';
+//     } else {
+//       vibe += ', Windy';
+//     }
+
+//     // Description-based vibes
+//     if (description.includes('rain')) {
+//       vibe += ', Rainy';
+//     } else if (description.includes('snow')) {
+//       vibe += ', Snowy';
+//     } else if (description.includes('clear')) {
+//       vibe += ', Clear';
+//     } else if (description.includes('cloud')) {
+//       vibe += ', Cloudy';
+//     }
+
+//     return vibe;
+//   };
+
+//   // Fetch playlist data based on vibe label
+//   const fetchPlaylistData = () => {
+//     const accessToken = 'BQDsK_Mnz6tbVu_G5wEWkqHuW1-Xk2TWV1KwABesjy4mRBdLnMN1oRBzmNG7uXG7monr8AEpnV_C7IgGA-MiobB5xwl_GLoQ5Do196V4YOHLvZIfUZk'; // Replace with your Spotify access token
+
+//     // Map vibes to Spotify playlist IDs
+//     const vibeToPlaylistID = {
+//       // Chill vibes
+//       'Morning Coziness': '1lfieyG6FbXoFvaa8kusIe',
+//       'Frosty Morning': '1lfieyG6FbXoFvaa8kusIe',
+//       'Refreshing Start': '37i9dQZF1DX0kbJZpiYdZl',
+//       'Misty Morning': '37i9dQZF1DX0kbJZpiYdZl',
+//       'Sunny Morning': '37i9dQZF1DX0kbJZpiYdZl',
+//       'Breezy Sunrise': '1lfieyG6FbXoFvaa8kusIe',
+//       'Energetic Morning': '37i9dQZF1DX0kbJZpiYdZl',
+//       'Sunrise Serenity': '37i9dQZF1DX0kbJZpiYdZl',
+//       'Tropical Morning': '37i9dQZF1DX0kbJZpiYdZl',
+//       'Summer Sunrise': '37i9dQZF1DX0kbJZpiYdZl',
+//       // Add more morning vibes as needed
+//     //37i9dQZF1DX0kbJZpiYdZl
+//       // Daytime vibes
+//       'Crisp Day': '37i9dQZF1DX0kbJZpiYdZl',
+//       'Mild Afternoon': '37i9dQZF1DX0kbJZpiYdZl',
+//       'Sunny Afternoon': '37i9dQZF1DX0kbJZpiYdZl',
+//       'Balmy Day': '37i9dQZF1DX0kbJZpiYdZl',
+//       'Scorching Afternoon': '37i9dQZF1DX0kbJZpiYdZl',
+//       // Add more daytime vibes as needed
+    
+//       // Nighttime vibes
+//       'Chilly Night': '37i9dQZF1DX0kbJZpiYdZl',
+//       'Frosty Night': '37i9dQZF1DX0kbJZpiYdZl',
+//       'Crisp Night': '37i9dQZF1DX0kbJZpiYdZl',
+//       'Chill Night': '37i9dQZF1DX0kbJZpiYdZl',
+//       'Mild Night': '37i9dQZF1DX0kbJZpiYdZl',
+//       'Balmy Night': '37i9dQZF1DX0kbJZpiYdZl',
+//       'Warm Night': '37i9dQZF1DX0kbJZpiYdZl',
+//       'Tropical Night': '37i9dQZF1DX0kbJZpiYdZl',
+//       'Sultry Night': '37i9dQZF1DX0kbJZpiYdZl',
+//       'Sweltering Night': '37i9dQZF1DX0kbJZpiYdZl',
+//       'Sweltering Morning': '37i9dQZF1DX0kbJZpiYdZl',
+//       //https://open.spotify.com/playlist/37i9dQZF1DX0kbJZpiYdZl?si=f3fc401dea6340fa
+//       // Add more morning vibes as needed
+    
+//       // Add more mappings for evening vibes
+    
+//       // Add more mappings for daytime vibes
+    
+//       // Add more mappings for nighttime vibes
+//     };
+    
+        
+    
+//         const playlistID = vibeToPlaylistID[vibeLabel];
+    
+//         fetch(`https://api.spotify.com/v1/playlists/${playlistID}`, {
+//           headers: {
+//              //'Bearer 7c7d4aa8eb8d4e9889e96199c2b63b7e'
+    
+//              'Authorization': 'Bearer ' + accessToken
+//           }
+//         })
+//           .then(response => response.json())
+//           .then(data => {
+//             setPlaylistData(data);
+//           })
+//           .catch(error => console.log('Error fetching playlist data:', error));
+    
+//   };
+
+//   // Render loading state
+//   if (loading) {
+//     return <div>Loading...</div>;
+//   }
+
+//   // Render error state
+//   if (error) {
+//     return <div>Error: {error}</div>;
+//   }
+
+//   // Render weather data and playlist
+//   return (
+//     <div>
+//       {weatherData && (
+//         <div>
+//           <h2>Current Weather</h2>
+//           <p>Location: {weatherData.name}</p>
+//           <p>Temperature: {weatherData.main.temp}&deg;F</p>
+//           <p>Humidity: {weatherData.main.humidity}%</p>
+//           <p>Wind Speed: {weatherData.wind.speed} mph</p>
+//           <p>Description: {weatherData.weather[0].description}</p>
+//           <p>Vibe Label: {vibeLabel}</p>
+//           <p>Playlist: {playlistData && playlistData.name}</p>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default WeatherApp;
