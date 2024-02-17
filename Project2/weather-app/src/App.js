@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+const React = require('react');
+const { useState, useEffect } = require('react');
 
 
 
@@ -156,8 +157,9 @@ const WeatherApp = () => {
   //     windCondition
   //   };
   // }
-  const { vibe, newVibeNumber } = getVibeLabel(weatherData);
-  let weatherToVibe = '';
+  const { vibe, newVibeNumber } = weatherData ? getVibeLabel(weatherData) : { vibe: '', newVibeNumber: 0 };
+
+  let weatherToVibe = null;
   let vibeParts = vibe.split(', ');
   if (vibeParts[1] == 'Morning') {
       if (vibeParts[2] == 'Cold') {
@@ -318,246 +320,7 @@ const WeatherApp = () => {
 // const weatherToVibe = {
 //   // const timeOfDay = vibeParts[0];
 //   // const temperature = vibeParts[1];
-//   // const humidity = vibeParts[2];
-//   // const windCondition = vibeParts[3];
-//     // Morning vibes
-//     //Instead corelate that time of day to the score
-
-    
-//     'Morning, Cold, Dry, Calm, 1': 'Morning Coziness',
-//     'Morning, Cold, Dry, Calm, 2': 'Morning Coziness',
-//     'Morning, Cold, Dry, Calm, 3': 'Morning Coziness',
-//     'Morning, Cold, Dry, Calm, 4': 'Morning Coziness',
-//     'Morning, Cold, Dry, Calm, 5': 'Morning Coziness',
-//     'Morning, Cold, Dry, Breezy, 1': 'Morning Coziness',
-//     'Morning, Cold, Dry, Breezy, 2': 'Morning Coziness',
-//     'Morning, Cold, Dry, Breezy, 3': 'Morning Coziness',
-//     'Morning, Cold, Dry, Breezy, 4': 'Morning Coziness',
-//     'Morning, Cold, Dry, Breezy, 5': 'Morning Coziness',
-//     'Morning, Cold, Dry, Windy, 1': 'Morning Coziness',
-//     'Morning, Cold, Dry, Windy, 2': 'Morning Coziness',
-//     'Morning, Cold, Dry, Windy, 3': 'Morning Coziness',
-//     'Morning, Cold, Dry, Windy, 4': 'Morning Coziness',
-//     'Morning, Cold, Dry, Windy, 5': 'Morning Coziness',
-//     'Morning, Cold, Humid, Calm, 1': 'Frosty Morning',
-//     'Morning, Cold, Humid, Calm, 2': 'Frosty Morning',
-//     'Morning, Cold, Humid, Calm, 3': 'Frosty Morning',
-//     'Morning, Cold, Humid, Calm, 4': 'Frosty Morning',
-//     'Morning, Cold, Humid, Calm, 5': 'Frosty Morning',
-//     'Morning, Cold, Humid, Breezy, 1': 'Frosty Morning',
-//     'Morning, Cold, Humid, Breezy, 2': 'Frosty Morning',
-//     'Morning, Cold, Humid, Breezy, 3': 'Frosty Morning',
-//     'Morning, Cold, Humid, Breezy, 4': 'Frosty Morning',
-//     'Morning, Cold, Humid, Breezy, 5': 'Frosty Morning',
-//     'Morning, Cold, Humid, Windy, 1': 'Frosty Morning',
-//     'Morning, Cold, Humid, Windy, 2': 'Frosty Morning',
-//     'Morning, Cold, Humid, Windy, 3': 'Frosty Morning',
-//     'Morning, Cold, Humid, Windy, 4': 'Frosty Morning',
-//     'Morning, Cold, Humid, Windy, 5': 'Frosty Morning',
-//     'Morning, Cool, Dry, Calm, 1': 'Refreshing Start',
-//     'Morning, Cool, Dry, Calm, 2': 'Refreshing Start',
-//     'Morning, Cool, Dry, Calm, 3': 'Refreshing Start',
-//     'Morning, Cool, Dry, Calm, 4': 'Refreshing Start',
-//     'Morning, Cool, Dry, Calm, 5': 'Refreshing Start',
-//     'Morning, Cool, Dry, Breezy, 1': 'Refreshing Start',
-//     'Morning, Cool, Dry, Breezy, 2': 'Refreshing Start',
-//     'Morning, Cool, Dry, Breezy, 3': 'Refreshing Start',
-//     'Morning, Cool, Dry, Breezy, 4': 'Refreshing Start',
-//     'Morning, Cool, Dry, Breezy, 5': 'Refreshing Start',
-//     'Morning, Cool, Dry, Windy, 1': 'Refreshing Start',
-//     'Morning, Cool, Dry, Windy, 2': 'Refreshing Start',
-//     'Morning, Cool, Dry, Windy, 3': 'Refreshing Start',
-//     'Morning, Cool, Dry, Windy, 4': 'Refreshing Start',
-//     'Morning, Cool, Dry, Windy, 5': 'Refreshing Start',
-//     'Morning, Cool, Humid, Calm, 1': 'Misty Morning',
-//     'Morning, Cool, Humid, Calm, 2': 'Misty Morning',
-//     'Morning, Cool, Humid, Calm, 3': 'Misty Morning',
-//     'Morning, Cool, Humid, Calm, 4': 'Misty Morning',
-//     'Morning, Cool, Humid, Calm, 5': 'Misty Morning',
-//     'Morning, Cool, Humid, Breezy, 1': 'Misty Morning',
-//     'Morning, Cool, Humid, Breezy, 2': 'Misty Morning',
-//     'Morning, Cool, Humid, Breezy, 3': 'Misty Morning',
-//     'Morning, Cool, Humid, Breezy, 4': 'Misty Morning',
-//     'Morning, Cool, Humid, Breezy, 5': 'Misty Morning',
-//     'Morning, Cool, Humid, Windy, 1': 'Misty Morning',
-//     'Morning, Cool, Humid, Windy, 2': 'Misty Morning',
-//     'Morning, Cool, Humid, Windy, 3': 'Misty Morning',
-//     'Morning, Cool, Humid, Windy, 4': 'Misty Morning',
-//     'Morning, Cool, Humid, Windy, 5': 'Misty Morning',
-//     'Morning, Pleasant, Dry, Calm, 1': 'Sunny Morning',
-//     'Morning, Pleasant, Dry, Calm, 2': 'Sunny Morning',
-//     'Morning, Pleasant, Dry, Calm, 3': 'Sunny Morning',
-//     'Morning, Pleasant, Dry, Calm, 4': 'Sunny Morning',
-//     'Morning, Pleasant, Dry, Calm, 5': 'Sunny Morning',
-//     'Morning, Pleasant, Dry, Breezy, 1': 'Sunny Morning',
-//     'Morning, Pleasant, Dry, Breezy, 2': 'Sunny Morning',
-//     'Morning, Pleasant, Dry, Breezy, 3': 'Sunny Morning',
-//     'Morning, Pleasant, Dry, Breezy, 4': 'Sunny Morning',
-//     'Morning, Pleasant, Dry, Breezy, 5': 'Sunny Morning',
-//     'Morning, Pleasant, Dry, Windy, 1': 'Sunny Morning',
-//     'Morning, Pleasant, Dry, Windy, 2': 'Sunny Morning',
-//     'Morning, Pleasant, Dry, Windy, 3': 'Sunny Morning',
-//     'Morning, Pleasant, Dry, Windy, 4': 'Sunny Morning',
-//     'Morning, Pleasant, Dry, Windy, 5': 'Sunny Morning',
-//     'Morning, Pleasant, Humid, Calm, 1': 'Breezy Sunrise',
-//     'Morning, Pleasant, Humid, Calm, 2': 'Breezy Sunrise',
-//     'Morning, Pleasant, Humid, Calm, 3': 'Breezy Sunrise',
-//     'Morning, Pleasant, Humid, Calm, 4': 'Breezy Sunrise',
-//     'Morning, Pleasant, Humid, Calm, 5': 'Breezy Sunrise',
-//     'Morning, Pleasant, Humid, Breezy, 1': 'Breezy Sunrise',
-//     'Morning, Pleasant, Humid, Breezy, 2': 'Breezy Sunrise',
-//     'Morning, Pleasant, Humid, Breezy, 3': 'Breezy Sunrise',
-//     'Morning, Pleasant, Humid, Breezy, 4': 'Breezy Sunrise',
-//     'Morning, Pleasant, Humid, Breezy, 5': 'Breezy Sunrise',
-//     'Morning, Pleasant, Humid, Windy, 1': 'Breezy Sunrise',
-//     'Morning, Pleasant, Humid, Windy, 2': 'Breezy Sunrise',
-//     'Morning, Pleasant, Humid, Windy, 3': 'Breezy Sunrise',
-//     'Morning, Pleasant, Humid, Windy, 4': 'Breezy Sunrise',
-//     'Morning, Pleasant, Humid, Windy, 5': 'Breezy Sunrise',
-//     'Morning, Warm, Dry, Calm, 1': 'Energetic Morning',
-//     'Morning, Warm, Dry, Calm, 2': 'Energetic Morning',
-//     'Morning, Warm, Dry, Calm, 3': 'Energetic Morning',
-//     'Morning, Warm, Dry, Calm, 4': 'Energetic Morning',
-//     'Morning, Warm, Dry, Calm, 5': 'Energetic Morning',
-//     'Morning, Warm, Dry, Breezy, 1': 'Energetic Morning',
-//     'Morning, Warm, Dry, Breezy, 2': 'Energetic Morning',
-//     'Morning, Warm, Dry, Breezy, 3': 'Energetic Morning',
-//     'Morning, Warm, Dry, Breezy, 4': 'Energetic Morning',
-//     'Morning, Warm, Dry, Breezy, 5': 'Energetic Morning',
-//     'Morning, Warm, Dry, Windy, 1': 'Energetic Morning',
-//     'Morning, Warm, Dry, Windy, 2': 'Energetic Morning',
-//     'Morning, Warm, Dry, Windy, 3': 'Energetic Morning',
-//     'Morning, Warm, Dry, Windy, 4': 'Energetic Morning',
-//     'Morning, Warm, Dry, Windy, 5': 'Energetic Morning',
-//     'Morning, Warm, Humid, Calm, 1': 'Sunrise Serenity',
-//     'Morning, Warm, Humid, Calm, 2': 'Sunrise Serenity',
-//     'Morning, Warm, Humid, Calm, 3': 'Sunrise Serenity',
-//     'Morning, Warm, Humid, Calm, 4': 'Sunrise Serenity',
-//     'Morning, Warm, Humid, Calm, 5': 'Sunrise Serenity',
-//     'Morning, Warm, Humid, Breezy, 1': 'Sunrise Serenity',
-//   'Morning, Warm, Humid, Breezy, 2': 'Sunrise Serenity',
-//   'Morning, Warm, Humid, Breezy, 3': 'Sunrise Serenity',
-//   'Morning, Warm, Humid, Breezy, 4': 'Sunrise Serenity',
-//   'Morning, Warm, Humid, Breezy, 5': 'Sunrise Serenity',
-//   'Morning, Warm, Humid, Windy, 1': 'Sunrise Serenity',
-//   'Morning, Warm, Humid, Windy, 2': 'Sunrise Serenity',
-//   'Morning, Warm, Humid, Windy, 3': 'Sunrise Serenity',
-//   'Morning, Warm, Humid, Windy, 4': 'Sunrise Serenity',
-//   'Morning, Warm, Humid, Windy, 5': 'Sunrise Serenity',
-//   'Morning, Hot, Dry, Calm, 1': 'Tropical Morning',
-//   'Morning, Hot, Dry, Calm, 2': 'Tropical Morning',
-//   'Morning, Hot, Dry, Calm, 3': 'Tropical Morning',
-//   'Morning, Hot, Dry, Calm, 4': 'Tropical Morning',
-//   'Morning, Hot, Dry, Calm, 5': 'Tropical Morning',
-//   'Morning, Hot, Dry, Breezy, 1': 'Tropical Morning',
-//   'Morning, Hot, Dry, Breezy, 2': 'Tropical Morning',
-//   'Morning, Hot, Dry, Breezy, 3': 'Tropical Morning',
-//   'Morning, Hot, Dry, Breezy, 4': 'Tropical Morning',
-//   'Morning, Hot, Dry, Breezy, 5': 'Tropical Morning',
-//   'Morning, Hot, Dry, Windy, 1': 'Tropical Morning',
-//   'Morning, Hot, Dry, Windy, 2': 'Tropical Morning',
-//   'Morning, Hot, Dry, Windy, 3': 'Tropical Morning',
-//   'Morning, Hot, Dry, Windy, 4': 'Tropical Morning',
-//   'Morning, Hot, Dry, Windy, 5': 'Tropical Morning',
-//   'Morning, Hot, Humid, Calm, 1': 'Summer Sunrise',
-//   'Morning, Hot, Humid, Calm, 2': 'Summer Sunrise',
-//   'Morning, Hot, Humid, Calm, 3': 'Summer Sunrise',
-//   'Morning, Hot, Humid, Calm, 4': 'Summer Sunrise',
-//   'Morning, Hot, Humid, Calm, 5': 'Summer Sunrise',
-//   'Morning, Hot, Humid, Breezy, 1': 'Summer Sunrise',
-//   'Morning, Hot, Humid, Breezy, 2': 'Summer Sunrise',
-//   'Morning, Hot, Humid, Breezy, 3': 'Summer Sunrise',
-//   'Morning, Hot, Humid, Breezy, 4': 'Summer Sunrise',
-//   'Morning, Hot, Humid, Breezy, 5': 'Summer Sunrise',
-//   'Morning, Hot, Humid, Windy, 1': 'Summer Sunrise',
-//   'Morning, Hot, Humid, Windy, 2': 'Summer Sunrise',
-//   'Morning, Hot, Humid, Windy, 3': 'Summer Sunrise',
-//   'Morning, Hot, Humid, Windy, 4': 'Summer Sunrise',
-//   'Morning, Hot, Humid, Windy, 5': 'Summer Sunrise',
-
-//   // Daytime vibes
-//   'Daytime, Cold, Dry, Calm, 1': 'Crisp Day',
-//   'Daytime, Cold, Dry, Calm, 2': 'Crisp Day',
-//   'Daytime, Cold, Dry, Calm, 3': 'Crisp Day',
-//   'Daytime, Cold, Dry, Calm, 4': 'Crisp Day',
-//   'Daytime, Cold, Dry, Calm, 5': 'Crisp Day',
-//   'Daytime, Cold, Dry, Breezy, 1': 'Crisp Day',
-//   'Daytime, Cold, Dry, Breezy, 2': 'Crisp Day',
-//   'Daytime, Cold, Dry, Breezy, 3': 'Crisp Day',
-//   'Daytime, Cold, Dry, Breezy, 4': 'Crisp Day',
-//   'Daytime, Cold, Dry, Breezy, 5': 'Crisp Day',
-//   'Daytime, Cold, Dry, Windy, 1': 'Crisp Day',
-//   'Daytime, Cold, Dry, Windy, 2': 'Crisp Day',
-//   'Daytime, Cold, Dry, Windy, 3': 'Crisp Day',
-//   'Daytime, Cold, Dry, Windy, 4': 'Crisp Day',
-//   'Daytime, Cold, Dry, Windy, 5': 'Crisp Day',
-//   'Daytime, Cold, Humid, Calm, 1': 'Frigid Daylight',
-//   'Daytime, Cold, Humid, Calm, 2': 'Frigid Daylight',
-//   'Daytime, Cold, Humid, Calm, 3': 'Frigid Daylight',
-//   'Daytime, Cold, Humid, Calm, 4': 'Frigid Daylight',
-//   'Daytime, Cold, Humid, Calm, 5': 'Frigid Daylight',
-//   'Daytime, Cold, Humid, Breezy, 1': 'Frigid Daylight',
-//   'Daytime, Cold, Humid, Breezy, 2': 'Frigid Daylight',
-//   'Daytime, Cold, Humid, Breezy, 3': 'Frigid Daylight',
-//   'Daytime, Cold, Humid, Breezy, 4': 'Frigid Daylight',
-//   'Daytime, Cold, Humid, Breezy, 5': 'Frigid Daylight',
-//   'Daytime, Cold, Humid, Windy, 1': 'Frigid Daylight',
-//   'Daytime, Cold, Humid, Windy, 2': 'Frigid Daylight',
-//   'Daytime, Cold, Humid, Windy, 3': 'Frigid Daylight',
-//   'Daytime, Cold, Humid, Windy, 4': 'Frigid Daylight',
-//   'Daytime, Cold, Humid, Windy, 5': 'Frigid Daylight',
-//   'Daytime, Cool, Dry, Calm, 1': 'Mild Afternoon',
-//   'Daytime, Cool, Dry, Calm, 2': 'Mild Afternoon',
-//   'Daytime, Cool, Dry, Calm, 3': 'Mild Afternoon',
-//   'Daytime, Cool, Dry, Calm, 4': 'Mild Afternoon',
-//   'Daytime, Cool, Dry, Calm, 5': 'Mild Afternoon',
-//   'Daytime, Cool, Dry, Breezy, 1': 'Mild Afternoon',
-//   'Daytime, Cool, Dry, Breezy, 2': 'Mild Afternoon',
-//   'Daytime, Cool, Dry, Breezy, 3': 'Mild Afternoon',
-//   'Daytime, Cool, Dry, Breezy, 4': 'Mild Afternoon',
-//   'Daytime, Cool, Dry, Breezy, 5': 'Mild Afternoon',
-//   'Daytime, Cool, Dry, Windy, 1': 'Mild Afternoon',
-//   'Daytime, Cool, Dry, Windy, 2': 'Mild Afternoon',
-//   'Daytime, Cool, Dry, Windy, 3': 'Mild Afternoon',
-//   'Daytime, Cool, Dry, Windy, 4': 'Mild Afternoon',
-//   'Daytime, Cool, Dry, Windy, 5': 'Mild Afternoon',
-//   'Daytime, Cool, Humid, Calm, 1': 'Breezy Daylight',
-//   'Daytime, Cool, Humid, Calm, 2': 'Breezy Daylight',
-//   'Daytime, Cool, Humid, Calm, 3': 'Breezy Daylight',
-//   'Daytime, Cool, Humid, Calm, 4': 'Breezy Daylight',
-//   'Daytime, Cool, Humid, Calm, 5': 'Breezy Daylight',
-//   'Daytime, Cool, Humid, Breezy, 1': 'Breezy Daylight',
-//   'Daytime, Cool, Humid, Breezy, 2': 'Breezy Daylight',
-//   'Daytime, Cool, Humid, Breezy, 3': 'Breezy Daylight',
-//   'Daytime, Cool, Humid, Breezy, 4': 'Breezy Daylight',
-//   'Daytime, Cool, Humid, Breezy, 5': 'Breezy Daylight',
-//   'Daytime, Cool, Humid, Windy, 1': 'Breezy Daylight',
-//   'Daytime, Cool, Humid, Windy, 2': 'Breezy Daylight',
-//   'Daytime, Cool, Humid, Windy, 3': 'Breezy Daylight',
-//   'Daytime, Cool, Humid, Windy, 4': 'Breezy Daylight',
-//   'Daytime, Cool, Humid, Windy, 5': 'Breezy Daylight',
-//   'Daytime, Pleasant, Dry, Calm, 1': 'Sunny Afternoon',
-//   'Daytime, Pleasant, Dry, Calm, 2': 'Sunny Afternoon',
-//   'Daytime, Pleasant, Dry, Calm, 3': 'Sunny Afternoon',
-//   'Daytime, Pleasant, Dry, Calm, 4': 'Sunny Afternoon',
-//   'Daytime, Pleasant, Dry, Calm, 5': 'Sunny Afternoon',
-//   'Daytime, Pleasant, Dry, Breezy, 1': 'Sunny Afternoon',
-//   'Daytime, Pleasant, Dry, Breezy, 2': 'Sunny Afternoon',
-//   'Daytime, Pleasant, Dry, Breezy, 3': 'Sunny Afternoon',
-//   'Daytime, Pleasant, Dry, Breezy, 4': 'Sunny Afternoon',
-//   'Daytime, Pleasant, Dry, Breezy, 5': 'Sunny Afternoon',
-//   'Daytime, Pleasant, Dry, Windy, 1': 'Sunny Afternoon',
-//   'Daytime, Pleasant, Dry, Windy, 2': 'Sunny Afternoon',
-//   'Daytime, Pleasant, Dry, Windy, 3': 'Sunny Afternoon',
-//   'Daytime, Pleasant, Dry, Windy, 4': 'Sunny Afternoon',
-//   'Daytime, Pleasant, Dry, Windy, 5': 'Sunny Afternoon',
-//   'Daytime, Pleasant, Humid, Calm, 1': 'Warm Daylight',
-//   'Daytime, Pleasant, Humid, Calm, 2': 'Warm Daylight',
-//   'Daytime, Pleasant, Humid, Calm, 3': 'Warm Daylight',
-//   'Daytime, Pleasant, Humid, Calm, 4': 'Warm Daylight',
-//   'Daytime, Pleasant, Humid, Calm, 5': 'Warm Daylight',
-
-  //};
+//   // con
 
 
     // Map vibes to Spotify playlist IDs
@@ -674,75 +437,68 @@ const WeatherApp = () => {
     //   );
     // };
     
-    return (
+   return (
+  <div>
+    {/* Existing weather data JSX */}
+    {weatherData && (
       <div>
-        {/* Existing weather data JSX */}
-        {weatherData && (
+        <h2>Current Weather</h2>
+        <p>Location: {weatherData.name}</p>
+        <p>Temperature: {weatherData.main.temp}&deg;F</p>
+        <p>Humidity: {weatherData.main.humidity}%</p>
+        <p>Wind Speed: {weatherData.wind.speed} mph</p>
+        <p>Description: {weatherData.weather[0].description}</p>
+        <p>Vibe Label: {vibeLabel}</p>
+        <button onClick={increaseVibeNumber}>Increase Vibe</button>
+        <button onClick={decreaseVibeNumber}>Decrease Vibe</button>
+        {/* Add a conditional check for weatherToVibe */}
+        {weatherToVibe && (
+          <iframe
+            title="Spotify Embed: Recommendation Playlist "
+            src={`https://open.spotify.com/embed/playlist/${vibeToPlaylistID[weatherToVibe[vibeLabel]]}?utm_source=generator&theme=0`}
+            width="100%"
+            height="100%"
+            style={{ minHeight: '360px' }}
+            frameBorder="0"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+          />
+        )}
+        <p>Playlist ID: {vibeToPlaylistID[weatherToVibe[vibeLabel]]}</p>
+        {vibeLabel && (
           <div>
-            <h2>Current Weather</h2>
-            <p>Location: {weatherData.name}</p>
-            <p>Temperature: {weatherData.main.temp}&deg;F</p>
-            <p>Humidity: {weatherData.main.humidity}%</p>
-            <p>Wind Speed: {weatherData.wind.speed} mph</p>
-            <p>Description: {weatherData.weather[0].description}</p>
-            <p>Vibe Label: {vibeLabel}</p>
-            <button onClick={increaseVibeNumber}>Increase Vibe</button>
-            <button onClick={decreaseVibeNumber}>Decrease Vibe</button>
-            const playlistId = '1lJfzGAF2jQd32lyPHYf7l';
-
-<iframe
-  title="Spotify Embed: Recommendation Playlist "
-  src={`https://open.spotify.com/embed/playlist/${vibeToPlaylistID[weatherToVibe[vibeLabel]]}?utm_source=generator&theme=0`}
-  width="100%"
-  height="100%"
-  style={{ minHeight: '360px' }}
-  frameBorder="0"
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-  loading="lazy"
-/>
-            <p>Playlist ID: {vibeToPlaylistID[weatherToVibe[vibeLabel]]}</p>
-            {vibeLabel && (
+            <p>Corresponding Vibe: {weatherToVibe[vibeLabel]}</p>
+            {/* Check if playlist data is available */}
+            {playlistData && (
               <div>
-                <p>Corresponding Vibe: {weatherToVibe[vibeLabel]}</p>
-                {/* Check if playlist data is available */}
-                {playlistData && (
-                  <div>
-                    <h3>Corresponding Playlist</h3>
-                    <p>Name: {playlistData.name}</p>
-                    <p>Total Followers: {playlistData.followers.total}</p>
-                    {/* Render playlist images if available */}
-                    {playlistData.images && playlistData.images.length > 0 && (
-                      <img src={playlistData.images[0].url} alt="Playlist Cover" />
-                    )}
-                    {/* Link to the playlist */}
-                    <p>
-                      Playlist URL:{" "}
-                      <a href={playlistData.external_urls.spotify}>
-                        {playlistData.external_urls.spotify}
-                      </a>
-                    </p>
-                  </div>
+                <h3>Corresponding Playlist</h3>
+                <p>Name: {playlistData.name}</p>
+                <p>Total Followers: {playlistData.followers.total}</p>
+                {/* Render playlist images if available */}
+                {playlistData.images && playlistData.images.length > 0 && (
+                  <img src={playlistData.images[0].url} alt="Playlist Cover" />
                 )}
+                {/* Link to the playlist */}
+                <p>
+                  Playlist URL:{" "}
+                  <a href={playlistData.external_urls.spotify}>
+                    {playlistData.external_urls.spotify}
+                  </a>
+                </p>
               </div>
             )}
           </div>
         )}
-        {/* Loading and error handling */}
-        {loading && <div>Loading...</div>}
-        {error && <div>Error: {error}</div>}
       </div>
-    );
-                    };
+    )}
+    {/* Loading and error handling */}
+    {loading && <div>Loading...</div>}
+    {error && <div>Error: {error}</div>}
+  </div>
+);
+
+   };
     
 
 export default WeatherApp;
-
-
-
-
-
-
-
-
-
 
