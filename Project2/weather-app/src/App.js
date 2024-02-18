@@ -9,7 +9,7 @@ const WeatherApp = () => {
   const [error, setError] = useState(null);
   const [vibeLabel, setVibeLabel] = useState('');
   const [playlistData, setPlaylistData] = useState(null);
-  let  [vibeNumber, setVibeNumber] = useState(1);
+  const [vibeNumber, setVibeNumber] = useState(1);
 
 
   useEffect(() => {
@@ -38,17 +38,19 @@ const WeatherApp = () => {
     fetchWeatherData();
   }, []);
 
+  //Gets their position
   const getCurrentPosition = () => {
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(resolve, reject);
     });
   };
 
+  //Gets and sets their vibe and vibeNumber
   useEffect(() => {
     if (weatherData) {
-      let { vibe} = getVibeLabel(weatherData);
+      let { weatherDescription} = getVibeLabel(weatherData);
       let { vibeNumber } = getVibeNumber(weatherData);
-      setVibeLabel(vibe);
+      setVibeLabel(weatherDescription);
       setVibeNumber(vibeNumber);
     }
   }, [weatherData]);
@@ -58,32 +60,32 @@ const WeatherApp = () => {
   const getVibeLabel = (weatherData) => {
     const temp = weatherData.main.temp;
 
-    let vibe = 'Neutral';
+    let weatherDescription = 'Neutral';
     const hour = new Date().getHours();
     if (hour >= 6 && hour < 12) {
-      vibe = 'Morning';
+      weatherDescription = 'Morning';
     } else if (hour >= 12 && hour < 18) {
-      vibe = 'Daytime';
+      weatherDescription = 'Daytime';
     } else {
-      vibe = 'Nighttime';
+      weatherDescription = 'Nighttime';
     }
   
 
     // Temperature-based vibes
     if (temp < 32) {
-      vibe += ', Cold';
+      weatherDescription += ', Cold';
     } else if (temp >= 32 && temp < 60) {
-      vibe += ', Cool';
+      weatherDescription += ', Cool';
     } else if (temp >= 60 && temp < 80) {
-      vibe += ', Pleasant';
+      weatherDescription += ', Pleasant';
     } else {
-      vibe += ', Warm';
+      weatherDescription += ', Warm';
     }
 
     // Humidity-based vibes
 
 
-    return { vibe};
+    return { weatherDescription};
   };
 
 
@@ -135,7 +137,6 @@ const WeatherApp = () => {
       vibeNumber = 1;
     }
 
-    setVibeNumber(vibeNumber)
     return { vibeNumber };
   };
 
@@ -178,220 +179,221 @@ const decreaseVibeNumber = () => {
   //     windCondition
   //   };
   // }
-  let { vibe} = weatherData ? getVibeLabel(weatherData) : { vibe: ''};
-  let { newVibeNumber } = weatherData ? getVibeNumber(weatherData) : {newVibeNumber: 0 };
+  let { weatherDescription} = weatherData ? getVibeLabel(weatherData) : { weatherDescription: ''};
+  // let { newVibeNumber } = weatherData ? getVibeNumber(weatherData) : {newVibeNumber: 0 };
 
   let weatherToVibe = '';
-  let vibeParts = vibe.split(', ');
+  let vibeParts = weatherDescription.split(', ');
+  console.log("Hi");
+  console.log(vibeParts);
+  console.log(vibeParts[0]);
+  console.log(vibeParts[1]);
+  console.log(vibeNumber);
   if (vibeParts[1] == 'Morning') {
-      if (vibeParts[2] == 'Cold') {
-          if (newVibeNumber == 1) {
-              weatherToVibe = 'Morning Coziness';
-          }
-          if (newVibeNumber == 2) {
-              weatherToVibe = 'Morning Coziness';
-          }
-          if (newVibeNumber == 3) {
-              weatherToVibe = 'Morning Coziness';
-          }
-          if (newVibeNumber == 4) {
-              weatherToVibe = 'Morning Coziness';
-          }
-          if (newVibeNumber == 5) {
-              weatherToVibe = 'Morning Coziness';
-          }
-      } else if (vibeParts[2] == 'Cool') {
-          if (newVibeNumber == 1) {
-              weatherToVibe = 'Morning Pleasantness';
-          }
-          if (newVibeNumber == 2) {
-              weatherToVibe = 'Morning Joy';
-          }
-          if (newVibeNumber == 3) {
-              weatherToVibe = 'Morning Refreshment';
-          }
-          if (newVibeNumber == 4) {
-              weatherToVibe = 'Morning Happiness';
-          }
-          if (newVibeNumber == 5) {
-              weatherToVibe = 'Morning Inspiration';
-          }
-      } else if (vibeParts[2] == 'Warm') {
-          if (newVibeNumber == 1) {
-              weatherToVibe = 'Morning Comfort';
-          }
-          if (newVibeNumber == 2) {
-              weatherToVibe = 'Morning Refreshment';
-          }
-          if (newVibeNumber == 3) {
-              weatherToVibe = 'Morning Happiness';
-          }
-          if (newVibeNumber == 4) {
-              weatherToVibe = 'Morning Bliss';
-          }
-          if (newVibeNumber == 5) {
-              weatherToVibe = 'Morning Excitement';
-          }
-      }
-  } else if (vibeParts[1] == 'Daytime') {
-      if (vibeParts[2] == 'Cold') {
-          if (newVibeNumber == 1) {
-              weatherToVibe = 'Daytime Calm';
-          }
-          if (newVibeNumber == 2) {
-              weatherToVibe = 'Daytime Coziness';
-          }
-          if (newVibeNumber == 3) {
-              weatherToVibe = 'Daytime Comfort';
-          }
-          if (newVibeNumber == 4) {
-              weatherToVibe = 'Daytime Serenity';
-          }
-          if (newVibeNumber == 5) {
-              weatherToVibe = 'Daytime Peace';
-          }
-      } else if (vibeParts[2] == 'Cool') {
-          if (newVibeNumber == 1) {
-              weatherToVibe = 'Daytime Pleasantness';
-          }
-          if (newVibeNumber == 2) {
-              weatherToVibe = 'Daytime Joy';
-          }
-          if (newVibeNumber == 3) {
-              weatherToVibe = 'Daytime Refreshment';
-          }
-          if (newVibeNumber == 4) {
-              weatherToVibe = 'Daytime Happiness';
-          }
-          if (newVibeNumber == 5) {
-              weatherToVibe = 'Daytime Inspiration';
-          }
-      } else if (vibeParts[2] == 'Warm') {
-          if (newVibeNumber == 1) {
-              weatherToVibe = 'Daytime Comfort';
-          }
-          if (newVibeNumber == 2) {
-              weatherToVibe = 'Daytime Refreshment';
-          }
-          if (newVibeNumber == 3) {
-              weatherToVibe = 'Daytime Happiness';
-          }
-          if (newVibeNumber == 4) {
-              weatherToVibe = 'Daytime Bliss';
-          }
-          if (newVibeNumber == 5) {
-              weatherToVibe = 'Daytime Excitement';
-          }
-      }
-  } else if (vibeParts[1] == 'Nighttime') {
-      if (vibeParts[2] == 'Cold') {
-          if (newVibeNumber == 1) {
-              weatherToVibe = 'Nighttime Coziness';
-          }
-          if (newVibeNumber == 2) {
-              weatherToVibe = 'Nighttime Comfort';
-          }
-          if (newVibeNumber == 3) {
-              weatherToVibe = 'Nighttime Serenity';
-          }
-          if (newVibeNumber == 4) {
-              weatherToVibe = 'Nighttime Peace';
-          }
-          if (newVibeNumber == 5) {
-              weatherToVibe = 'Nighttime Relaxation';
-          }
-      } else if (vibeParts[2] == 'Cool') {
-          if (newVibeNumber == 1) {
-              weatherToVibe = 'Nighttime Pleasantness';
-          }
-          if (newVibeNumber == 2) {
-              weatherToVibe = 'Nighttime Joy';
-          }
-          if (newVibeNumber == 3) {
-              weatherToVibe = 'Nighttime Refreshment';
-          }
-          if (newVibeNumber == 4) {
-              weatherToVibe = 'Nighttime Happiness';
-          }
-          if (newVibeNumber == 5) {
-              weatherToVibe = 'Nighttime Inspiration';
-          }
-      } else if (vibeParts[2] == 'Warm') {
-          if (newVibeNumber == 1) {
-              weatherToVibe = 'Nighttime Comfort';
-          }
-          if (newVibeNumber == 2) {
-              weatherToVibe = 'Nighttime Warmth';
-          }
-          if (newVibeNumber == 3) {
-              weatherToVibe = 'Nighttime Happiness';
-          }
-          if (newVibeNumber == 4) {
-              weatherToVibe = 'Nighttime Bliss';
-          }
-          if (newVibeNumber == 5) {
-              weatherToVibe = 'Nighttime Excitement';
-          }
-      }
-  } else {
-      // Handle any other combinations or default case
-  }
+    if (vibeParts[2] == 'Cold') {
+        if (vibeNumber == 1) {
+            weatherToVibe = 'Morning Coziness';
+        }
+        if (vibeNumber == 2) {
+            weatherToVibe = 'Morning Coziness';
+        }
+        if (vibeNumber == 3) {
+            weatherToVibe = 'Morning Coziness';
+        }
+        if (vibeNumber == 4) {
+            weatherToVibe = 'Morning Coziness';
+        }
+        if (vibeNumber == 5) {
+            weatherToVibe = 'Morning Coziness';
+        }
+    } else if (vibeParts[2] == 'Cool') {
+        if (vibeNumber == 1) {
+            weatherToVibe = 'Morning Pleasantness';
+        }
+        if (vibeNumber == 2) {
+            weatherToVibe = 'Morning Joy';
+        }
+        if (vibeNumber == 3) {
+            weatherToVibe = 'Morning Refreshment';
+        }
+        if (vibeNumber == 4) {
+            weatherToVibe = 'Morning Happiness';
+        }
+        if (vibeNumber == 5) {
+            weatherToVibe = 'Morning Inspiration';
+        }
+    } else if (vibeParts[2] == 'Warm') {
+        if (vibeNumber == 1) {
+            weatherToVibe = 'Morning Comfort';
+        }
+        if (vibeNumber == 2) {
+            weatherToVibe = 'Morning Refreshment';
+        }
+        if (vibeNumber == 3) {
+            weatherToVibe = 'Morning Happiness';
+        }
+        if (vibeNumber == 4) {
+            weatherToVibe = 'Morning Bliss';
+        }
+        if (vibeNumber == 5) {
+            weatherToVibe = 'Morning Excitement';
+        }
+    }
+} else if (vibeParts[0] == 'Daytime') {
+    if (vibeParts[2] == 'Cold') {
+        if (vibeNumber == 1) {
+            weatherToVibe = 'Daytime Calm';
+        }
+        if (vibeNumber == 2) {
+            weatherToVibe = 'Daytime Coziness';
+        }
+        if (vibeNumber == 3) {
+            weatherToVibe = 'Daytime Comfort';
+        }
+        if (vibeNumber == 4) {
+            weatherToVibe = 'Daytime Serenity';
+        }
+        if (vibeNumber == 5) {
+            weatherToVibe = 'Daytime Peace';
+        }
+    } else if (vibeParts[1] == 'Cool') {
+        if (vibeNumber == 1) {
+            weatherToVibe = 'Daytime Pleasantness';
+        }
+        if (vibeNumber == 2) {
+            weatherToVibe = 'Daytime Joy';
+            console.log("BHJBHJHB");
+        }
+        if (vibeNumber == 3) {
+            weatherToVibe = 'Daytime Refreshment';
+        }
+        if (vibeNumber == 4) {
+            weatherToVibe = 'Daytime Happiness';
+        }
+        if (vibeNumber == 5) {
+            weatherToVibe = 'Daytime Inspiration';
+        }
+    } else if (vibeParts[2] == 'Warm') {
+        if (vibeNumber == 1) {
+            weatherToVibe = 'Daytime Comfort';
+        }
+        if (vibeNumber == 2) {
+            weatherToVibe = 'Daytime Refreshment';
+        }
+        if (vibeNumber == 3) {
+            weatherToVibe = 'Daytime Happiness';
+        }
+        if (vibeNumber == 4) {
+            weatherToVibe = 'Daytime Bliss';
+        }
+        if (vibeNumber == 5) {
+            weatherToVibe = 'Daytime Excitement';
+        }
+    }
+} else if (vibeParts[1] == 'Nighttime') {
+    if (vibeParts[2] == 'Cold') {
+        if (vibeNumber == 1) {
+            weatherToVibe = 'Nighttime Coziness';
+        }
+        if (vibeNumber == 2) {
+            weatherToVibe = 'Nighttime Comfort';
+        }
+        if (vibeNumber == 3) {
+            weatherToVibe = 'Nighttime Serenity';
+        }
+        if (vibeNumber == 4) {
+            weatherToVibe = 'Nighttime Peace';
+        }
+        if (vibeNumber == 5) {
+            weatherToVibe = 'Nighttime Relaxation';
+        }
+    } else if (vibeParts[2] == 'Cool') {
+        if (vibeNumber == 1) {
+            weatherToVibe = 'Nighttime Pleasantness';
+        }
+        if (vibeNumber == 2) {
+            weatherToVibe = 'Nighttime Joy';
+        }
+        if (vibeNumber == 3) {
+            weatherToVibe = 'Nighttime Refreshment';
+        }
+        if (vibeNumber == 4) {
+            weatherToVibe = 'Nighttime Happiness';
+        }
+        if (vibeNumber == 5) {
+            weatherToVibe = 'Nighttime Inspiration';
+        }
+    } else if (vibeParts[2] == 'Warm') {
+        if (vibeNumber == 1) {
+            weatherToVibe = 'Nighttime Comfort';
+        }
+        if (vibeNumber == 2) {
+            weatherToVibe = 'Nighttime Warmth';
+        }
+        if (vibeNumber == 3) {
+            weatherToVibe = 'Nighttime Happiness';
+        }
+        if (vibeNumber == 4) {
+            weatherToVibe = 'Nighttime Bliss';
+        }
+        if (vibeNumber == 5) {
+            weatherToVibe = 'Nighttime Excitement';
+        }
+    }
+} else {
+    // Handle any other combinations or default case
+}
+console.log(weatherToVibe);
 
 
 
     // Map vibes to Spotify playlist IDs
-    const vibeToPlaylistID = {
-      // Chill vibes
-      'Morning Coziness': '1lfieyG6FbXoFvaa8kusIe',
-      'Frosty Morning': '1lfieyG6FbXoFvaa8kusIe',
-      'Refreshing Start': '37i9dQZF1DX0kbJZpiYdZl',
-      'Misty Morning': '37i9dQZF1DX0kbJZpiYdZl',
-      'Sunny Morning': '37i9dQZF1DX0kbJZpiYdZl',
-      'Breezy Sunrise': '1lfieyG6FbXoFvaa8kusIe',
-      'Energetic Morning': '37i9dQZF1DX0kbJZpiYdZl',
-      'Sunrise Serenity': '37i9dQZF1DX0kbJZpiYdZl',
-      'Tropical Morning': '37i9dQZF1DX0kbJZpiYdZl',
-      'Summer Sunrise': '37i9dQZF1DX0kbJZpiYdZl',
-      // Add more morning vibes as needed
-    //37i9dQZF1DX0kbJZpiYdZl
-      // Daytime vibes
-      'Crisp Day': '37i9dQZF1DX0kbJZpiYdZl',
-      'Mild Afternoon': '37i9dQZF1DX0kbJZpiYdZl',
-      'Frigid Daylight': '37i9dQZF1DX0kbJZpiYdZl',
-      'Sunny Afternoon': '37i9dQZF1DX0kbJZpiYdZl',
-      'Frosty Night': '37i9dQZF1DX0kbJZpiYdZl',
-      'Balmy Day': '37i9dQZF1DX0kbJZpiYdZl',
-      'Scorching Afternoon': '37i9dQZF1DX0kbJZpiYdZl',
-      // Add more daytime vibes as needed
-  
-      // Nighttime vibes
-      'Chilly Night': '37i9dQZF1DX0kbJZpiYdZl',
-      'Frosty Night': '37i9dQZF1DX0kbJZpiYdZl',
-      'Crisp Night': '37i9dQZF1DX0kbJZpiYdZl',
-      'Chill Night': '37i9dQZF1DX0kbJZpiYdZl',
-      'Mild Night': '37i9dQZF1DX0kbJZpiYdZl',
-      'Balmy Night': '37i9dQZF1DX0kbJZpiYdZl',
-      'Warm Night': '37i9dQZF1DX0kbJZpiYdZl',
-      'Tropical Night': '37i9dQZF1DX0kbJZpiYdZl',
-      'Sultry Night': '37i9dQZF1DX0kbJZpiYdZl',
-      'Sweltering Night': '37i9dQZF1DX0kbJZpiYdZl',
-      'Sweltering Morning': '37i9dQZF1DX0kbJZpiYdZl',
-      'Mild Night': '37i9dQZF1DX0kbJZpiYdZl',
-      //https://open.spotify.com/playlist/37i9dQZF1DX0kbJZpiYdZl?si=f3fc401dea6340fa
-      // Add more morning vibes as needed
-  
-      // Add more mappings for evening vibes
-  
-      // Add more mappings for daytime vibes
-  
-      // Add more mappings for nighttime vibes
-      };
+// Map vibes to Spotify playlist IDs
+// Map vibes to Spotify playlist IDs
+const vibeToPlaylistID = {
+  // Morning vibes
+  'Morning Coziness': '1lfieyG6FbXoFvaa8kusIe',
+  'Morning Pleasantness': '1lfieyG6FbXoFvaa8kusIe',
+  'Morning Joy': '1lfieyG6FbXoFvaa8kusIe',
+  'Morning Refreshment': '1lfieyG6FbXoFvaa8kusIe',
+  'Morning Happiness': '1lfieyG6FbXoFvaa8kusIe',
+  'Morning Inspiration': '1lfieyG6FbXoFvaa8kusIe',
+  'Morning Comfort': '1lfieyG6FbXoFvaa8kusIe',
+  'Morning Bliss': '1lfieyG6FbXoFvaa8kusIe',
+  'Morning Excitement': '1lfieyG6FbXoFvaa8kusIe',
+  // Daytime vibes
+  'Daytime Calm': '1lfieyG6FbXoFvaa8kusIe',
+  'Daytime Coziness': '1lfieyG6FbXoFvaa8kusIe',
+  'Daytime Comfort': '1lfieyG6FbXoFvaa8kusIe',
+  'Daytime Serenity': '1lfieyG6FbXoFvaa8kusIe',
+  'Daytime Peace': '1lfieyG6FbXoFvaa8kusIe',
+  'Daytime Pleasantness': '1lfieyG6FbXoFvaa8kusIe',
+  'Daytime Joy': '1lfieyG6FbXoFvaa8kusIe',
+  'Daytime Refreshment': '1lfieyG6FbXoFvaa8kusIe',
+  'Daytime Happiness': '1lfieyG6FbXoFvaa8kusIe',
+  'Daytime Inspiration': '1lfieyG6FbXoFvaa8kusIe',
+  // Nighttime vibes
+  'Nighttime Coziness': '1lfieyG6FbXoFvaa8kusIe',
+  'Nighttime Comfort': '1lfieyG6FbXoFvaa8kusIe',
+  'Nighttime Serenity': '1lfieyG6FbXoFvaa8kusIe',
+  'Nighttime Peace': '1lfieyG6FbXoFvaa8kusIe',
+  'Nighttime Relaxation': '1lfieyG6FbXoFvaa8kusIe',
+  'Nighttime Pleasantness': '1lfieyG6FbXoFvaa8kusIe',
+  'Nighttime Joy': '1lfieyG6FbXoFvaa8kusIe',
+  'Nighttime Refreshment': '1lfieyG6FbXoFvaa8kusIe',
+  'Nighttime Happiness': '1lfieyG6FbXoFvaa8kusIe',
+  'Nighttime Inspiration': '1lfieyG6FbXoFvaa8kusIe',
+  'Nighttime Warmth': '1lfieyG6FbXoFvaa8kusIe',
+  'Nighttime Bliss': '1lfieyG6FbXoFvaa8kusIe',
+  'Nighttime Excitement': '1lfieyG6FbXoFvaa8kusIe',
+};
 
 
+console.log(vibeToPlaylistID);
 
   const fetchPlaylistData = () => {
     const accessToken = 'BQDsK_Mnz6tbVu_G5wEWkqHuW1-Xk2TWV1KwABesjy4mRBdLnMN1oRBzmNG7uXG7monr8AEpnV_C7IgGA-MiobB5xwl_GLoQ5Do196V4YOHLvZIfUZk'; // Replace with your Spotify access token      
-    const playlistID = vibeToPlaylistID[vibeLabel];
+    const playlistID = vibeToPlaylistID[weatherToVibe];
 
       fetch(`https://api.spotify.com/v1/playlists/${playlistID}`, {
         headers: {
@@ -438,15 +440,15 @@ const decreaseVibeNumber = () => {
     <p>Wind Speed: {weatherData.wind.speed} mph</p>
     <p>{vibeNumber}</p>
     <p>Description: {weatherData.weather[0].description}</p>
-    <p>Vibe Label: {vibeLabel}</p>
-    <p>Vibe ID: {vibeToPlaylistID[vibeLabel]}</p>
+    <p>Vibe Label: {weatherToVibe}</p>
+    <p>Vibe ID: {vibeToPlaylistID[weatherToVibe]}</p>
     <button onClick={increaseVibeNumber}>Increase Vibe</button>
     <button onClick={decreaseVibeNumber}>Decrease Vibe</button>
     {/* Change this part */}
     {vibeLabel && (
       <iframe
         title="Spotify Embed: Recommendation Playlist "
-        src={`https://open.spotify.com/embed/playlist/${vibeToPlaylistID[vibeLabel]}?utm_source=generator&theme=0`}
+        src={`https://open.spotify.com/embed/playlist/${vibeToPlaylistID[weatherToVibe]}?utm_source=generator&theme=0`}
         width="100%"
         height="100%"
         style={{ minHeight: '360px' }}
@@ -456,7 +458,7 @@ const decreaseVibeNumber = () => {
       />
     )}
     {/* End of change */}
-    <p>Playlist ID: {vibeToPlaylistID[vibeLabel]}</p>
+    <p>Playlist ID: {vibeToPlaylistID[weatherToVibe]}</p>
     {vibeLabel && (
       <div>
         <p>Corresponding Vibe: {weatherToVibe[vibeLabel]}</p>
@@ -494,3 +496,13 @@ const decreaseVibeNumber = () => {
     
 
 export default WeatherApp;
+
+
+
+
+
+
+
+
+
+
