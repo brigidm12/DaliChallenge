@@ -46,21 +46,18 @@ const WeatherApp = () => {
 
   useEffect(() => {
     if (weatherData) {
-      let { vibe, vibeNumber } = getVibeLabel(weatherData);
+      let { vibe} = getVibeLabel(weatherData);
+      let { vibeNumber } = getVibeNumber(weatherData);
       setVibeLabel(vibe);
       setVibeNumber(vibeNumber);
     }
   }, [weatherData]);
 
+
+
   const getVibeLabel = (weatherData) => {
     const temp = weatherData.main.temp;
-    const humidity = weatherData.main.humidity;
-    const windSpeed = weatherData.wind.speed;
-    const description = weatherData.weather[0].description.toLowerCase();
-    
-    let vibeNumber = 3;
-    
-  
+
     let vibe = 'Neutral';
     const hour = new Date().getHours();
     if (hour >= 6 && hour < 12) {
@@ -75,18 +72,33 @@ const WeatherApp = () => {
     // Temperature-based vibes
     if (temp < 32) {
       vibe += ', Cold';
-      vibeNumber-=3;
     } else if (temp >= 32 && temp < 60) {
       vibe += ', Cool';
-      vibeNumber-=1;
     } else if (temp >= 60 && temp < 80) {
       vibe += ', Pleasant';
-      vibeNumber+=1;
     } else {
       vibe += ', Warm';
-      vibeNumber+=2;
     }
 
+    // Humidity-based vibes
+
+
+    return { vibe};
+  };
+
+
+
+
+
+
+  const getVibeNumber = (weatherData) => {
+    const humidity = weatherData.main.humidity;
+    const windSpeed = weatherData.wind.speed;
+    const description = weatherData.weather[0].description.toLowerCase();
+    
+    let vibeNumber = 3;
+    // console.log(vibeNumber);
+  
     // Humidity-based vibes
     if (humidity < 30) {
       vibeNumber+=1;
@@ -123,10 +135,12 @@ const WeatherApp = () => {
       vibeNumber = 1;
     }
 
-    vibe+=', '.concat((vibeNumber.toString()));
-
-    return { vibe, vibeNumber };
+    setVibeNumber(vibeNumber)
+    return { vibeNumber };
   };
+
+
+
 
 
 
@@ -164,7 +178,8 @@ const decreaseVibeNumber = () => {
   //     windCondition
   //   };
   // }
-  let { vibe, newVibeNumber } = weatherData ? getVibeLabel(weatherData) : { vibe: '', newVibeNumber: 0 };
+  let { vibe} = weatherData ? getVibeLabel(weatherData) : { vibe: ''};
+  let { newVibeNumber } = weatherData ? getVibeNumber(weatherData) : {newVibeNumber: 0 };
 
   let weatherToVibe = '';
   let vibeParts = vibe.split(', ');
@@ -421,6 +436,7 @@ const decreaseVibeNumber = () => {
     <p>Temperature: {weatherData.main.temp}&deg;F</p>
     <p>Humidity: {weatherData.main.humidity}%</p>
     <p>Wind Speed: {weatherData.wind.speed} mph</p>
+    <p>{vibeNumber}</p>
     <p>Description: {weatherData.weather[0].description}</p>
     <p>Vibe Label: {vibeLabel}</p>
     <p>Vibe ID: {vibeToPlaylistID[vibeLabel]}</p>
