@@ -9,7 +9,7 @@ const WeatherApp = () => {
   const [error, setError] = useState(null);
   const [vibeLabel, setVibeLabel] = useState('');
   const [playlistData, setPlaylistData] = useState(null);
-  const [vibeNumber, setVibeNumber] = useState(1);
+  let  [vibeNumber, setVibeNumber] = useState(1);
 
 
   useEffect(() => {
@@ -46,7 +46,7 @@ const WeatherApp = () => {
 
   useEffect(() => {
     if (weatherData) {
-      const { vibe, vibeNumber } = getVibeLabel(weatherData);
+      let { vibe, vibeNumber } = getVibeLabel(weatherData);
       setVibeLabel(vibe);
       setVibeNumber(vibeNumber);
     }
@@ -57,7 +57,9 @@ const WeatherApp = () => {
     const humidity = weatherData.main.humidity;
     const windSpeed = weatherData.wind.speed;
     const description = weatherData.weather[0].description.toLowerCase();
+    
     let vibeNumber = 3;
+    
   
     let vibe = 'Neutral';
     const hour = new Date().getHours();
@@ -117,8 +119,8 @@ const WeatherApp = () => {
     if(vibeNumber > 5){
       vibeNumber = 5;
     }
-    else if(vibeNumber < 0){
-      vibeNumber = 0;
+    else if(vibeNumber < 1){
+      vibeNumber = 1;
     }
 
     vibe+=', '.concat((vibeNumber.toString()));
@@ -137,15 +139,20 @@ const WeatherApp = () => {
 //!!!!!!!!!!!!!!!!!!
   
   // Function to increase the vibe number
-  const increaseVibeNumber = () => {
-    setVibeNumber(vibeNumber => Math.min(vibeNumber + 1, 10));
-  };
+// Function to increase the vibe number
+const increaseVibeNumber = () => {
+  console.log("increase");
+  setVibeNumber(vibeNumber => Math.min(vibeNumber + 1, 5)); // Ensure vibeNumber stays within range [1, 5]
+};
 
-  // Function to decrease the vibe number
-  const decreaseVibeNumber = () => {
-    setVibeNumber(vibeNumber => Math.max(vibeNumber - 1, 0));
-    
-  };
+
+
+// Function to decrease the vibe number
+const decreaseVibeNumber = () => {
+  console.log("decrease");
+  setVibeNumber(vibeNumber => Math.max(vibeNumber - 1, 1)); // Ensure vibeNumber stays within range [1, 5]
+};
+
 
   // function convertVibeStringToConditions(vibeString) {
 
@@ -157,9 +164,9 @@ const WeatherApp = () => {
   //     windCondition
   //   };
   // }
-  const { vibe, newVibeNumber } = weatherData ? getVibeLabel(weatherData) : { vibe: '', newVibeNumber: 0 };
+  let { vibe, newVibeNumber } = weatherData ? getVibeLabel(weatherData) : { vibe: '', newVibeNumber: 0 };
 
-  let weatherToVibe = null;
+  let weatherToVibe = '';
   let vibeParts = vibe.split(', ');
   if (vibeParts[1] == 'Morning') {
       if (vibeParts[2] == 'Cold') {
@@ -314,13 +321,7 @@ const WeatherApp = () => {
   } else {
       // Handle any other combinations or default case
   }
-  
 
-// Add mappings for daytime vibes
-// const weatherToVibe = {
-//   // const timeOfDay = vibeParts[0];
-//   // const temperature = vibeParts[1];
-//   // con
 
 
     // Map vibes to Spotify playlist IDs
@@ -409,88 +410,64 @@ const WeatherApp = () => {
   if (error) {
     return <div>Error: {error}</div>;
   }
-
-    // Existing state and useEffect hooks...
-      
-    //   return (
-    //     <div>
-    //       {/* Replace existing JSX code for rendering weather data */}
-    //       {weatherData && (
-    //         <div>
-    //           <h2>Current Weather</h2>
-    //           <p>Location: {weatherData.name}</p>
-    //           <p>Temperature: {weatherData.main.temp}&deg;F</p>
-    //           <p>Humidity: {weatherData.main.humidity}%</p>
-    //           <p>Wind Speed: {weatherData.wind.speed} mph</p>
-    //           <p>Description: {weatherData.weather[0].description}</p>
-    //           <p>Vibe Label: {vibeLabel}</p>
-    //           <p>Playlist ID: {vibeToPlaylistID[weatherToVibe[vibeLabel]]}</p>
-    //           {vibeLabel && (
-    //             <p>Corresponding Vibe: {weatherToVibe[vibeLabel]}</p>
-    //           )}
-              
-    //         </div>
-    //       )}
-    //       {loading && <div>Loading...</div>}
-    //       {error && <div>Error: {error}</div>}
-    //     </div>
-    //   );
-    // };
     
    return (
   <div>
     {/* Existing weather data JSX */}
     {weatherData && (
+  <div>
+    <h2>Current Weather</h2>
+    <p>Location: {weatherData.name}</p>
+    <p>Temperature: {weatherData.main.temp}&deg;F</p>
+    <p>Humidity: {weatherData.main.humidity}%</p>
+    <p>Wind Speed: {weatherData.wind.speed} mph</p>
+    <p>Description: {weatherData.weather[0].description}</p>
+    <p>Vibe Label: {vibeLabel}</p>
+    <p>Vibe ID: {vibeToPlaylistID[vibeLabel]}</p>
+    <button onClick={increaseVibeNumber}>Increase Vibe</button>
+    <button onClick={decreaseVibeNumber}>Decrease Vibe</button>
+    {/* Change this part */}
+    {vibeLabel && (
+      <iframe
+        title="Spotify Embed: Recommendation Playlist "
+        src={`https://open.spotify.com/embed/playlist/${vibeToPlaylistID[vibeLabel]}?utm_source=generator&theme=0`}
+        width="100%"
+        height="100%"
+        style={{ minHeight: '360px' }}
+        frameBorder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+      />
+    )}
+    {/* End of change */}
+    <p>Playlist ID: {vibeToPlaylistID[vibeLabel]}</p>
+    {vibeLabel && (
       <div>
-        <h2>Current Weather</h2>
-        <p>Location: {weatherData.name}</p>
-        <p>Temperature: {weatherData.main.temp}&deg;F</p>
-        <p>Humidity: {weatherData.main.humidity}%</p>
-        <p>Wind Speed: {weatherData.wind.speed} mph</p>
-        <p>Description: {weatherData.weather[0].description}</p>
-        <p>Vibe Label: {vibeLabel}</p>
-        <button onClick={increaseVibeNumber}>Increase Vibe</button>
-        <button onClick={decreaseVibeNumber}>Decrease Vibe</button>
-        {/* Add a conditional check for weatherToVibe */}
-        {weatherToVibe && (
-          <iframe
-            title="Spotify Embed: Recommendation Playlist "
-            src={`https://open.spotify.com/embed/playlist/${vibeToPlaylistID[weatherToVibe[vibeLabel]]}?utm_source=generator&theme=0`}
-            width="100%"
-            height="100%"
-            style={{ minHeight: '360px' }}
-            frameBorder="0"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"
-          />
-        )}
-        <p>Playlist ID: {vibeToPlaylistID[weatherToVibe[vibeLabel]]}</p>
-        {vibeLabel && (
+        <p>Corresponding Vibe: {weatherToVibe[vibeLabel]}</p>
+        {/* Check if playlist data is available */}
+        {playlistData && (
           <div>
-            <p>Corresponding Vibe: {weatherToVibe[vibeLabel]}</p>
-            {/* Check if playlist data is available */}
-            {playlistData && (
-              <div>
-                <h3>Corresponding Playlist</h3>
-                <p>Name: {playlistData.name}</p>
-                <p>Total Followers: {playlistData.followers.total}</p>
-                {/* Render playlist images if available */}
-                {playlistData.images && playlistData.images.length > 0 && (
-                  <img src={playlistData.images[0].url} alt="Playlist Cover" />
-                )}
-                {/* Link to the playlist */}
-                <p>
-                  Playlist URL:{" "}
-                  <a href={playlistData.external_urls.spotify}>
-                    {playlistData.external_urls.spotify}
-                  </a>
-                </p>
-              </div>
+            <h3>Corresponding Playlist</h3>
+            <p>Name: {playlistData.name}</p>
+            <p>Total Followers: {playlistData.followers.total}</p>
+            {/* Render playlist images if available */}
+            {playlistData.images && playlistData.images.length > 0 && (
+              <img src={playlistData.images[0].url} alt="Playlist Cover" />
             )}
+            {/* Link to the playlist */}
+            <p>
+              Playlist URL:{" "}
+              <a href={playlistData.external_urls.spotify}>
+                {playlistData.external_urls.spotify}
+              </a>
+            </p>
           </div>
         )}
       </div>
     )}
+  </div>
+)}
+
     {/* Loading and error handling */}
     {loading && <div>Loading...</div>}
     {error && <div>Error: {error}</div>}
@@ -501,4 +478,3 @@ const WeatherApp = () => {
     
 
 export default WeatherApp;
-
