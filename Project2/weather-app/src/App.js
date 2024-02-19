@@ -343,51 +343,60 @@ const decreaseVibeNumber = () => {
 } else {
     // Handle any other combinations or default case
 }
-console.log(weatherToVibe);
+console.log("hi");
+console.log("it is", weatherToVibe);
 
 
 
     // Map vibes to Spotify playlist IDs
-// Map vibes to Spotify playlist IDs
-// Map vibes to Spotify playlist IDs
-const vibeToPlaylistID = {
-  // Morning vibes
-  'Morning Coziness': '1lfieyG6FbXoFvaa8kusIe',
-  'Morning Pleasantness': '1lfieyG6FbXoFvaa8kusIe',
-  'Morning Joy': '1lfieyG6FbXoFvaa8kusIe',
-  'Morning Refreshment': '1lfieyG6FbXoFvaa8kusIe',
-  'Morning Happiness': '1lfieyG6FbXoFvaa8kusIe',
-  'Morning Inspiration': '1lfieyG6FbXoFvaa8kusIe',
-  'Morning Comfort': '1lfieyG6FbXoFvaa8kusIe',
-  'Morning Bliss': '1lfieyG6FbXoFvaa8kusIe',
-  'Morning Excitement': '1lfieyG6FbXoFvaa8kusIe',
-  // Daytime vibes
-  'Daytime Calm': '1lfieyG6FbXoFvaa8kusIe',
-  'Daytime Coziness': '1lfieyG6FbXoFvaa8kusIe',
-  'Daytime Comfort': '1lfieyG6FbXoFvaa8kusIe',
-  'Daytime Serenity': '1lfieyG6FbXoFvaa8kusIe',
-  'Daytime Peace': '1lfieyG6FbXoFvaa8kusIe',
-  'Daytime Pleasantness': '1lfieyG6FbXoFvaa8kusIe',
-  'Daytime Joy': '1lfieyG6FbXoFvaa8kusIe',
-  'Daytime Refreshment': '1lfieyG6FbXoFvaa8kusIe',
-  'Daytime Happiness': '1lfieyG6FbXoFvaa8kusIe',
-  'Daytime Inspiration': '1lfieyG6FbXoFvaa8kusIe',
-  // Nighttime vibes
-  'Nighttime Coziness': '1lfieyG6FbXoFvaa8kusIe',
-  'Nighttime Comfort': '1lfieyG6FbXoFvaa8kusIe',
-  'Nighttime Serenity': '1lfieyG6FbXoFvaa8kusIe',
-  'Nighttime Peace': '1lfieyG6FbXoFvaa8kusIe',
-  'Nighttime Relaxation': '1lfieyG6FbXoFvaa8kusIe',
-  'Nighttime Pleasantness': '1lfieyG6FbXoFvaa8kusIe',
-  'Nighttime Joy': '1lfieyG6FbXoFvaa8kusIe',
-  'Nighttime Refreshment': '1lfieyG6FbXoFvaa8kusIe',
-  'Nighttime Happiness': '1lfieyG6FbXoFvaa8kusIe',
-  'Nighttime Inspiration': '1lfieyG6FbXoFvaa8kusIe',
-  'Nighttime Warmth': '1lfieyG6FbXoFvaa8kusIe',
-  'Nighttime Bliss': '1lfieyG6FbXoFvaa8kusIe',
-  'Nighttime Excitement': '1lfieyG6FbXoFvaa8kusIe',
-};
-
+    const vibeToPlaylistID = {
+      // Chill vibes
+      'Morning Coziness': '1lfieyG6FbXoFvaa8kusIe',
+      'Frosty Morning': '1lfieyG6FbXoFvaa8kusIe',
+      'Refreshing Start': '37i9dQZF1DX0kbJZpiYdZl',
+      'Misty Morning': '37i9dQZF1DX0kbJZpiYdZl',
+      'Sunny Morning': '37i9dQZF1DX0kbJZpiYdZl',
+      'Breezy Sunrise': '1lfieyG6FbXoFvaa8kusIe',
+      'Energetic Morning': '37i9dQZF1DX0kbJZpiYdZl',
+      'Sunrise Serenity': '37i9dQZF1DX0kbJZpiYdZl',
+      'Tropical Morning': '37i9dQZF1DX0kbJZpiYdZl',
+      'Summer Sunrise': '37i9dQZF1DX0kbJZpiYdZl',
+      // Add more morning vibes as needed
+    //37i9dQZF1DX0kbJZpiYdZl
+      // Daytime vibes
+      'Crisp Day': '37i9dQZF1DX0kbJZpiYdZl',
+      'Mild Afternoon': '37i9dQZF1DX0kbJZpiYdZl',
+      'Frigid Daylight': '37i9dQZF1DX0kbJZpiYdZl',
+      'Sunny Afternoon': '37i9dQZF1DX0kbJZpiYdZl',
+      'Frosty Night': '37i9dQZF1DX0kbJZpiYdZl',
+      'Balmy Day': '37i9dQZF1DX0kbJZpiYdZl',
+      'Scorching Afternoon': '37i9dQZF1DX0kbJZpiYdZl',
+      'Daytime Joy': '37i9dQZF1DX0kbJZpiYdZl',
+      // Add more daytime vibes as needed
+  
+      'Daytime Happiness': '37i9dQZF1DX0kbJZpiYdZl',
+      // Nighttime vibes
+      'Chilly Night': '37i9dQZF1DX0kbJZpiYdZl',
+      'Frosty Night': '37i9dQZF1DX0kbJZpiYdZl',
+      'Crisp Night': '37i9dQZF1DX0kbJZpiYdZl',
+      'Chill Night': '37i9dQZF1DX0kbJZpiYdZl',
+      'Mild Night': '37i9dQZF1DX0kbJZpiYdZl',
+      'Balmy Night': '37i9dQZF1DX0kbJZpiYdZl',
+      'Warm Night': '37i9dQZF1DX0kbJZpiYdZl',
+      'Tropical Night': '37i9dQZF1DX0kbJZpiYdZl',
+      'Sultry Night': '37i9dQZF1DX0kbJZpiYdZl',
+      'Sweltering Night': '37i9dQZF1DX0kbJZpiYdZl',
+      'Sweltering Morning': '37i9dQZF1DX0kbJZpiYdZl',
+      'Mild Night': '37i9dQZF1DX0kbJZpiYdZl',
+      //https://open.spotify.com/playlist/37i9dQZF1DX0kbJZpiYdZl?si=f3fc401dea6340fa
+      // Add more morning vibes as needed
+  
+      // Add more mappings for evening vibes
+  
+      // Add more mappings for daytime vibes
+  
+      // Add more mappings for nighttime vibes
+      };
 
 console.log(vibeToPlaylistID);
 
@@ -440,7 +449,7 @@ console.log(vibeToPlaylistID);
     <p>Wind Speed: {weatherData.wind.speed} mph</p>
     <p>{vibeNumber}</p>
     <p>Description: {weatherData.weather[0].description}</p>
-    <p>Vibe Label: {weatherToVibe}</p>
+    <p>Vibe Label: {vibeLabel}</p>
     <p>Vibe ID: {vibeToPlaylistID[weatherToVibe]}</p>
     <button onClick={increaseVibeNumber}>Increase Vibe</button>
     <button onClick={decreaseVibeNumber}>Decrease Vibe</button>
@@ -458,7 +467,7 @@ console.log(vibeToPlaylistID);
       />
     )}
     {/* End of change */}
-    <p>Playlist ID: {vibeToPlaylistID[weatherToVibe]}</p>
+    <p>Playlist ID: {vibeToPlaylistID[vibeLabel]}</p>
     {vibeLabel && (
       <div>
         <p>Corresponding Vibe: {weatherToVibe[vibeLabel]}</p>
