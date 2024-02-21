@@ -40,9 +40,4 @@ This web application is built using React and aims to provide Spotify playlist r
 ### Adjusting Vibe
 - Increase or decrease the vibe level to fine-tune the playlist recommendations.
 
-## Contributors
-- [Your Name]
-- [Your Email]
 
-## License
-This project is licensed under the [MIT License](LICENSE).
