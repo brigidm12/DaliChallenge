@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding-top: 85px; /* Adjusted to account for the fixed navbar */
+  overflow-y: auto; /* Ensure vertical scrolling */
+}
+
+.container {
+  max-width: 600px;
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-top: 20%;
+}
+
+h2 {
+  margin-top: 0;
+  font-family: 'Pacifico', cursive;
+  font-size: 36px;
+  color: #333;
+}
+.weather-info {
+  margin-bottom: 20px;
+}
+
+.weather-info p {
+  margin: 10px 0;
+  font-size: 24px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.weather-info p span {
+  font-weight: 500;
+  color: #4CAF50; /* Green color for emphasis */
+}
+
+/* styles.css */
+/* Add this CSS to adjust image size and alignment */
+img {
+  max-height: 40px;
+  vertical-align: top;
+}
+
+
+.buttons {
+  margin-top: 20px;
+}
+
+.button-container {
+  margin-top: 20px; /* Adjust the margin value as needed */
+}
+
+
+button {
+  padding: 12px 24px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 18px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.playlist-container {
+  margin-top: 40px;
+}
+
+.playlist-info {
+  margin-top: 20px;
+}
+
+.playlist-info img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.playlist-info p {
+  margin: 10px 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.playlist-info a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+.playlist-info a:hover {
+  text-decoration: underline;
+}
+
